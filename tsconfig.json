@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "module": "CommonJS",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "lib": ["ES5", "ES6"],
+        "target": "es6",
+        "outDir": "./build",
+        "esModuleInterop": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "strictPropertyInitialization": false,
+    },
+    "exclude": ["node_modules", "build", "db"],
+    "include": ["./src/**/*"]
+}

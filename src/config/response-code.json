@@ -1,0 +1,46 @@
+{
+    "success": {
+        "code": 200,
+        "message": "성공"
+    },
+    "noContent": {
+        "code": 204,
+        "message": "데이터 없음"
+    },
+    "badRequest": {
+        "code": 400,
+        "message": "잘못된 요청"
+    },
+    "unauthorized": {
+        "code": 401,
+        "message": "비인가 유저"
+    },
+    "forbidden": {
+        "code": 403,
+        "message": "API 권한 없음"
+    },
+    "tooManyRequest": {
+        "code": 429,
+        "message": "접속자 많음"
+    },
+    "severError": {
+        "code": 500,
+        "message": "서버 오류"
+    },
+    "notImplemented": {
+        "code": 501,
+        "message": "API 없음"
+    },
+    "validationError": {
+        "code": 600,
+        "message": "데이터 검증 오류"
+    },
+    "validationUniqueError": {
+        "code": 601,
+        "message": "이미 존재하는 데이터입니다."
+    },
+    "customError": {
+        "code": 700,
+        "message": ""
+    }
+}

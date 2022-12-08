@@ -1,0 +1,61 @@
+version: "3"
+services:
+    iriro-mariadb:
+        image: mariadb:10.6.4
+        container_name: iriro-mariadb
+        restart: always
+        command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+        volumes:
+            - "db-data:/var/lib/mysql"
+        environment:
+            - MARIADB_DATABASE=${MARIADB_DATABASE:-iriro}
+            - MARIADB_USER=${MARIADB_USER:-iriro}
+            - MARIADB_PASSWORD=${MARIADB_PASSWORD:-thwlsWkd123}
+            - MARIADB_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-thwlsWkd123}
+            - TZ=Asia/Seoul
+        ports:
+            - "3307:3306"
+        networks:
+            - iriro_net
+    iriro-rabbitmq:
+        image: rabbitmq:3-management-alpine
+        container_name: iriro-rabbitmq
+        environment:
+            - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER:-hparcs}
+            - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS:-humax12!}
+            - RABBITMQ_DEFAULT_VHOST=${RABBITMQ_DEFAULT_VHOST:-/}
+        ports:
+            - "5672:5672"
+            - "15670:15670"
+            - "15672:15672"
+            - "15674:15674"
+            - "61613:61613"
+        volumes:
+            - "mq-data:/bar/lib/rabbitmq"
+        networks:
+            - iriro_net
+    iriro-be:
+        depends_on:
+            - iriro-mariadb
+            - iriro-rabbitmq
+        environment:
+            - NODE_ENV=production
+            - TZ=Asia/Seoul
+        build:
+            context: .
+            dockerfile: ./Dockerfile
+        volumes:
+            - "./logs:/app/logs"
+            - "./data:/app/data"
+        container_name: iriro-be
+        ports:
+            - "4000:4000"
+        networks:
+            - iriro_net
+
+volumes:
+    db-data:
+    mq-data:
+networks:
+  iriro_net:
+    driver: bridge
